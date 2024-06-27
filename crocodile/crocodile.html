@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crocodile Teeth Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            font-family: Arial, sans-serif;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .crocodile {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            background-image: url('app.png'); /* Add your crocodile image here */
+            background-size: cover;
+        }
+        .teeth {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 10px;
+        }
+        .tooth {
+            width: 100px;
+            height: 100px;
+            background-image: url('tooth.png'); /* Add your tooth image here */
+            background-size: cover;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .tooth:hover {
+            transform: translateY(-10px);
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="crocodile">
+            <div class="teeth" id="teeth">
+                <!-- Teeth will be generated here -->
+            </div>
+        </div>
+        <div class="message" id="message">Click a tooth to play!</div>
+    </div>
+
+    <script>
+        const numTeeth = 10;
+        const teethContainer = document.getElementById('teeth');
+        const message = document.getElementById('message');
+        const badToothIndex = Math.floor(Math.random() * numTeeth);
+
+        function handleClick(event) {
+            const clickedIndex = parseInt(event.target.dataset.index);
+            if (clickedIndex === badToothIndex) {
+                message.textContent = 'Ouch! You clicked the bad tooth!';
+                message.style.color = 'red';
+            } else {
+                message.textContent = 'Phew! That was a good tooth.';
+                message.style.color = '#00796b';
+            }
+        }
+
+        function createTeeth() {
+            for (let i = 0; i < numTeeth; i++) {
+                const tooth = document.createElement('div');
+                tooth.classList.add('tooth');
+                tooth.dataset.index = i;
+                tooth.addEventListener('click', handleClick);
+                teethContainer.appendChild(tooth);
+            }
+        }
+
+        createTeeth();
+    </script>
+</body>
+</html>

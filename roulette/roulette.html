@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="roulette.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="roulette">
+        <div class="arrow">
+          <img src="arrow.png">
+        </div>
+        <div class="wheel">
+          <img src="spinner.png">
+        </div>
+      </div>
+
+      <!-- <p>ref: https://codepen.io/daniandl/pen/mMQmGV</p> -->
+  <script>
+    let currentLength = -4.86
+
+$('.roulette').click(() => {
+  currentLength += 1080 + (getRandomInt(0, 37) * 9.729)
+  $('.wheel img').css('transform', 'rotate(-'+currentLength+'deg)')
+})
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+  </script>
+</body>
+</html>
